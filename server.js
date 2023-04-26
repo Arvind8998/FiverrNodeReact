@@ -20,6 +20,9 @@ try {
   console.log(error);
 }
 
+// to send json form client side
+app.use(express.json());
+
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", userRoutes);
