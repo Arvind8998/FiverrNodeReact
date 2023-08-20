@@ -9,6 +9,7 @@ import messageRoute from "./routes/message.route.js";
 import reviewRoute from "./routes/review.route.js";
 import authRoute from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 const app = express();
 dotenv.config();
@@ -22,6 +23,7 @@ try {
 }
 
 // to send json form client side
+app.use(cors({ origin: "http://localhost:3000", credential: true }));
 app.use(express.json());
 app.use(cookieParser());
 

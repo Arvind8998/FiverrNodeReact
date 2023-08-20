@@ -1,8 +1,7 @@
-const createError = (status, message) => {
+const createError = (status = 500, message = "Something went wrong") => {
   const error = new Error();
-  error.status = 404;
-  error.message = "Something went wrong";
-
+  error.status = status;
+  error.message = message;
   return error;
 };
 
