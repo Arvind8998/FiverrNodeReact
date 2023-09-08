@@ -55,14 +55,16 @@ export const getGigs = async (req, res, next) => {
     }
 
     if (query.min || query.max) {
+      console.log(query.min);
+
       filters.price = {};
 
       if (query.min) {
-        filters.price.$lt = query.min;
+        filters.price.$gte = query.min;
       }
 
       if (query.max) {
-        filters.price.$gt = query.max;
+        filters.price.$lte = query.max;
       }
     }
 
@@ -70,7 +72,7 @@ export const getGigs = async (req, res, next) => {
       filters.title = { $regex: query.search, $options: "i" };
     }
 
-    const gigs = await Gig.find(filters);
+    const gigs = await Gig.find(filters).sort({ [query.sort]: -1 });
     res.status(200).send(gigs);
   } catch (err) {
     next(err);
