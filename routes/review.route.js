@@ -1,8 +1,15 @@
 import express from "express";
-import { deleteUser } from "../controllers/user.controller.js";
+import {
+  createReview,
+  getReviews,
+  deleteReview,
+} from "../controllers/review.controller.js";
+import { verifyToken } from "../middlewares/jwt.js";
 
 const router = express.Router();
 
-router.get("/test", deleteUser);
+router.post("/", verifyToken, createReview);
+router.get("/:id", verifyToken, getReviews);
+router.delete("/:id", verifyToken, deleteReview);
 
 export default router;
